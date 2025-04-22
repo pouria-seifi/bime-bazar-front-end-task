@@ -12,7 +12,7 @@ export interface IButton {
 }
 
 export const defaultButtonClasses = {
-  base: "appearance-none flex transition-all duration-700 font-normal",
+  base: "appearance-none flex transition-all duration-700 font-normal flex items-center justify-center",
   primary: {
     disabled: "",
     active: "justify-center text-center bg-yellow text-black",
@@ -48,15 +48,15 @@ const Button: FC<IButton> = ({
       disabled={isLoading || isDisable}
       onClick={onClick}
       type={type}
-      className={`
-        ${defaultButtonClasses.base} 
-        ${width} 
-        ${isDisable && defaultButtonClasses[color].disabled} 
-        ${!isDisable && defaultButtonClasses[color].active}
-        ${isLoading && defaultButtonClasses[color].loading}
-        ${!isLoading && !isDisable && "cursor-pointer"}
-        ${className}
-      `}
+      className={
+        `${defaultButtonClasses.base} ` +
+        `${width} ` +
+        `${isDisable ? defaultButtonClasses[color].disabled : ""} ` +
+        `${!isDisable ? defaultButtonClasses[color].active : ""} ` +
+        `${isLoading ? defaultButtonClasses[color].loading : ""} ` +
+        `${!isLoading && !isDisable ? "cursor-pointer" : ""} ` +
+        `${className} `
+      }
       {...rest}
     >
       {isLoading ? "loading" : <>{children}</>}
