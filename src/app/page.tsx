@@ -7,6 +7,7 @@ import { Typography } from "@/src/components/typography";
 import { COLORS, FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
 import Header from "@/src/components/header";
 import { LabelValuePairs } from "@/src/types";
+import VehicleOwnerDetailsForm from "@/src/components/vehicleOwnerDetailsForm";
 
 const insurancePolicyDetails: LabelValuePairs = [
   { label: "شرکت بیمه گر", value: "پارسیان" },
@@ -51,6 +52,11 @@ export default function Home() {
               ))}
             </div>
           </div>
+        </section>
+
+        <section className="mt-8">
+          <Header title="مشخصات مالک خودرو" src={Logo} />
+          <VehicleOwnerDetailsForm />
         </section>
       </main>
     </div>
