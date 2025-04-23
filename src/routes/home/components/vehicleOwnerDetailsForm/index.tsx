@@ -12,6 +12,8 @@ import Input from "@/src/components/input";
 import Button from "@/src/components/button";
 import { postVehicleOwnerDetails } from "@/src/actions/vehicleOwner";
 import { IPostVehicleOwnerDetailsResult } from "@/src/types";
+import NextLink from "@/src/components/nextLink";
+import { PATH } from "@/src/enums/global.enum";
 
 const VehicleOwnerDetailsForm: React.FC = () => {
   const formRef = useRef<HTMLFormElement>(null);
@@ -93,15 +95,18 @@ const VehicleOwnerDetailsForm: React.FC = () => {
         لطفا آدرسی را که می خواهید روی بیمه نامه درج شود, وارد کنید.
       </Typography.Text>
 
-      <Button color="primary" className="h-12 mt-2">
-        <Typography.Text
-          weight={FONT_WEIGHT.semiBold}
-          size={FONT_SIZE.base}
-          className="leading-7"
-        >
-          انتخاب از آدرس های من
-        </Typography.Text>
-      </Button>
+      <NextLink href={PATH.userAddressModal}>
+        <Button color="primary" className="h-12 mt-2">
+          <Typography.Text
+            weight={FONT_WEIGHT.semiBold}
+            size={FONT_SIZE.base}
+            className="leading-7"
+          >
+            انتخاب از آدرس های من
+          </Typography.Text>
+        </Button>
+      </NextLink>
+
       <Button
         type="submit"
         color="thirdinary"
