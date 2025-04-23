@@ -1,20 +1,32 @@
 "use client";
-import React, { useActionState } from "react";
+import React, { startTransition, useActionState } from "react";
 
 import { Typography } from "@/src/components/typography";
-import { FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
+import { COLORS, FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
 import Input from "@/src/components/input";
 import Button from "@/src/components/button";
+import { postVehicleOwnerDetails } from "@/src/actions/vehicleOwner";
+import { IPostVehicleOwnerDetailsResult } from "@/src/types";
 
-interface Props {
-  title?: string;
-}
+const VehicleOwnerDetailsForm: React.FC = () => {
+  const [message, formAction, isPending] = useActionState<
+    IPostVehicleOwnerDetailsResult,
+    FormData
+  >(postVehicleOwnerDetails, {
+    nationalId: "",
+    phoneNumber: "",
+    addressId: "",
+  });
 
-const VehicleOwnerDetailsForm: React.FC<Props> = () => {
-  const [message, formAction, isPending] = useActionState(() => {}, null);
-
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    startTransition(() => {
+      formAction(formData);
+    });
+  };
   return (
-    <form action={formAction} className="flex flex-col px-5 py-6">
+    <form onSubmit={handleSubmit} className="flex flex-col px-5 py-6">
       <Typography.Text
         weight={FONT_WEIGHT.medium}
         size={FONT_SIZE.base}
@@ -22,8 +34,16 @@ const VehicleOwnerDetailsForm: React.FC<Props> = () => {
       >
         لطفا اطلاعات شخصی مالک خودرو را وارد کنید:
       </Typography.Text>
-      <Input name="nationalCode" placeholder="کد ملی" />
-      <Input name="phoneNumber" placeholder="شماره تلفن همراه" />
+      <Input
+        name="nationalId"
+        placeholder="کد ملی"
+        error={message?.errors?.nationalIdError}
+      />
+      <Input
+        name="phoneNumber"
+        placeholder="شماره تلفن همراه"
+        error={message?.errors?.phoneNumberError}
+      />
 
       <Typography.Text
         weight={FONT_WEIGHT.medium}
@@ -35,10 +55,12 @@ const VehicleOwnerDetailsForm: React.FC<Props> = () => {
       <Typography.Text
         weight={FONT_WEIGHT.regular}
         size={FONT_SIZE.sm}
+        color={message?.errors?.addressIdError ? COLORS.red : COLORS.black}
         className="leading-7"
       >
         لطفا آدرسی را که می خواهید روی بیمه نامه درج شود, وارد کنید.
       </Typography.Text>
+
       <Button color="primary" className="h-12 mt-2">
         <Typography.Text
           weight={FONT_WEIGHT.semiBold}
@@ -49,9 +71,11 @@ const VehicleOwnerDetailsForm: React.FC<Props> = () => {
         </Typography.Text>
       </Button>
       <Button
+        type="submit"
         color="thirdinary"
         className="h-12 mt-6 max-w-32 mr-auto"
-        isDisable
+        // isDisable
+        isLoading={isPending}
       >
         <Typography.Text
           weight={FONT_WEIGHT.medium}
