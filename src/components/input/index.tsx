@@ -9,6 +9,8 @@ type InputProps = {
   error?: string;
   disabled?: boolean;
   className?: string;
+  pattern?: string;
+  dir?: string;
 };
 
 const Input: React.FC<InputProps> = ({
@@ -20,10 +22,13 @@ const Input: React.FC<InputProps> = ({
   error,
   disabled = false,
   className = "",
+  pattern,
+  dir = "rtl",
 }) => {
   return (
     <div className="flex flex-col gap-1">
       <input
+        dir={dir}
         id={name}
         name={name}
         type={type}
@@ -31,6 +36,7 @@ const Input: React.FC<InputProps> = ({
         onChange={onChange}
         placeholder={placeholder}
         disabled={disabled}
+        pattern={pattern}
         className={`
           border border-gray-1 p-3 
           focus:outline-none focus:ring-0

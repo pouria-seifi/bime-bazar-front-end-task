@@ -72,11 +72,19 @@ const VehicleOwnerDetailsForm: React.FC = () => {
         name="nationalId"
         placeholder="کد ملی"
         error={message?.errors?.nationalIdError}
+        type="tel"
+        pattern="[0-9]*"
+        className="placeholder:text-right"
+        dir="ltr"
       />
       <Input
         name="phoneNumber"
         placeholder="شماره تلفن همراه"
         error={message?.errors?.phoneNumberError}
+        type="tel"
+        pattern="[0-9]*"
+        className="placeholder:!text-right"
+        dir="ltr"
       />
 
       <Typography.Text
