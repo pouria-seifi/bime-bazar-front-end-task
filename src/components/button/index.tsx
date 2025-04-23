@@ -1,4 +1,7 @@
+import Image from "next/image";
 import { FC, MouseEvent, ReactNode } from "react";
+
+import Loading from "@/public/images/loading.svg";
 
 export interface IButton {
   children?: string | ReactNode;
@@ -12,7 +15,7 @@ export interface IButton {
 }
 
 export const defaultButtonClasses = {
-  base: "appearance-none flex transition-all duration-700 font-normal flex items-center justify-center",
+  base: "appearance-none flex transition-all duration-100 font-normal flex items-center justify-center",
   primary: {
     disabled: "",
     active: "justify-center text-center bg-yellow text-black",
@@ -59,7 +62,18 @@ const Button: FC<IButton> = ({
       }
       {...rest}
     >
-      {isLoading ? "loading" : <>{children}</>}
+      {isLoading ? (
+        <Image
+          className="mx-2 rotate"
+          src={Loading}
+          alt="loading icon"
+          width={20}
+          height={20}
+        />
+      ) : (
+        <></>
+      )}
+      {children}
     </button>
   );
 };
