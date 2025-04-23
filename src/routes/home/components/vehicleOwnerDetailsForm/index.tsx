@@ -1,5 +1,10 @@
 "use client";
-import React, { startTransition, useActionState } from "react";
+import React, {
+  startTransition,
+  useActionState,
+  useRef,
+  useState,
+} from "react";
 
 import { Typography } from "@/src/components/typography";
 import { COLORS, FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
@@ -9,6 +14,9 @@ import { postVehicleOwnerDetails } from "@/src/actions/vehicleOwner";
 import { IPostVehicleOwnerDetailsResult } from "@/src/types";
 
 const VehicleOwnerDetailsForm: React.FC = () => {
+  const formRef = useRef<HTMLFormElement>(null);
+  const [isFormValid, setIsFormValid] = useState(false);
+
   const [message, formAction, isPending] = useActionState<
     IPostVehicleOwnerDetailsResult,
     FormData
@@ -25,8 +33,32 @@ const VehicleOwnerDetailsForm: React.FC = () => {
       formAction(formData);
     });
   };
+
+  const validateInputs = () => {
+    const form = formRef.current;
+    if (!form) return;
+
+    const nationalId =
+      (form.elements.namedItem("nationalId") as HTMLInputElement)?.value ?? "";
+    const phoneNumber =
+      (form.elements.namedItem("phoneNumber") as HTMLInputElement)?.value ?? "";
+
+    const isValid = !!(
+      nationalId &&
+      nationalId.trim() &&
+      phoneNumber &&
+      phoneNumber.trim()
+    );
+    setIsFormValid(isValid);
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col px-5 py-6">
+    <form
+      ref={formRef}
+      onSubmit={handleSubmit}
+      onInput={validateInputs}
+      className="flex flex-col px-5 py-6"
+    >
       <Typography.Text
         weight={FONT_WEIGHT.medium}
         size={FONT_SIZE.base}
@@ -74,7 +106,7 @@ const VehicleOwnerDetailsForm: React.FC = () => {
         type="submit"
         color="thirdinary"
         className="h-12 mt-6 max-w-32 mr-auto"
-        // isDisable
+        isDisable={!isFormValid}
         isLoading={isPending}
       >
         <Typography.Text
