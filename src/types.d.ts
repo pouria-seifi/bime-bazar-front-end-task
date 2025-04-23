@@ -4,3 +4,20 @@ export interface LabelValuePair {
 }
 
 export type LabelValuePairs = LabelValuePair[];
+
+export interface IVehicleOwnerDetailsForm {
+  nationalId: string;
+  phoneNumber: string;
+  addressId: string;
+}
+
+export interface IVehicleOwnerDetailsFormErrors {
+  nationalIdError?: string;
+  phoneNumberError?: string;
+  addressIdError?: string;
+}
+
+export interface IPostVehicleOwnerDetailsResult
+  extends IVehicleOwnerDetailsForm {
+  errors?: IVehicleOwnerDetailsFormErrors;
+}
