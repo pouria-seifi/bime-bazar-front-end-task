@@ -4,7 +4,7 @@ import {
   IPostVehicleOwnerDetailsResult,
   IVehicleOwnerDetailsFormErrors,
 } from "@/src/types";
-import { isValidIranianMobile, isValidNationalId } from "@/src/utils";
+import { isValidMobile, isValidNationalId } from "@/src/utils";
 
 const BASE_URL = "https://front-end-task.bmbzr.ir";
 
@@ -25,7 +25,7 @@ export async function postVehicleOwnerDetails(
   if (!nationalId || !isValidNationalId(nationalId)) {
     errors.nationalIdError = "کدملی وارد شده معتبر نیست.";
   }
-  if (!phoneNumber || !isValidIranianMobile(phoneNumber)) {
+  if (!phoneNumber || !isValidMobile(phoneNumber)) {
     errors.phoneNumberError = "شماره تلفن همراه معتبر نیست.";
   }
   if (!addressId) {

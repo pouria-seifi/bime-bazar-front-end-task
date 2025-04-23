@@ -15,7 +15,7 @@ export function isValidNationalId(nationalId: string) {
   );
 }
 
-export function isValidIranianMobile(phoneNumber: string) {
+export function isValidMobile(phoneNumber: string) {
   // Remove any spaces or dashes just in case
   const cleaned = phoneNumber.replace(/\D/g, "");
 

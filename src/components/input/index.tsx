@@ -33,14 +33,14 @@ const Input: React.FC<InputProps> = ({
         disabled={disabled}
         className={`
           border border-gray-1 p-3 
-          focus:outline-none focus:ring-0 focus:border-transparent 
+          focus:outline-none focus:ring-0
           disabled:cursor-not-allowed 
           placeholder:text-sm placeholder:font-medium
-          ${error ? "border-red-500" : "border-gray-300 mb-7"} 
+          ${error ? "border-red text-red" : "border-gray-1 mb-7"} 
           ${className}
         `}
       />
-      {error && <p className="text-xs text-red-500 h-7">{error}</p>}
+      {error && <span className="text-xs text-red h-7">{error}</span>}
     </div>
   );
 };
