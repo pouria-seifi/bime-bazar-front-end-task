@@ -1,7 +1,7 @@
-import Image from "next/image";
 import { FC, MouseEvent, ReactNode } from "react";
 
 import Loading from "@/public/images/loading.svg";
+import NextImage from "@/src/components/nextImage";
 
 export interface IButton {
   children?: string | ReactNode;
@@ -63,7 +63,7 @@ const Button: FC<IButton> = ({
       {...rest}
     >
       {isLoading ? (
-        <Image
+        <NextImage
           className="mx-2 rotate"
           src={Loading}
           alt="loading icon"
