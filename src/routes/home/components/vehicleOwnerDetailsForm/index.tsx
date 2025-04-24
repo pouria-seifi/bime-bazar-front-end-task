@@ -18,7 +18,9 @@ import { PATH } from "@/src/enums/global.enum";
 import useUserStore from "@/src/stores/user";
 
 const VehicleOwnerDetailsForm: React.FC = () => {
-  const userAddress = useUserStore((state) => state.address);
+  const userSelectedAddress = useUserStore(
+    (state) => state.userSelectedAddress
+  );
   const formRef = useRef<HTMLFormElement>(null);
   const [isFormValid, setIsFormValid] = useState(false);
 
@@ -97,14 +99,14 @@ const VehicleOwnerDetailsForm: React.FC = () => {
       >
         آدرس جهت درج روی بیمه نامه
       </Typography.Text>
-      {userAddress?.details ? (
+      {userSelectedAddress?.details ? (
         <Typography.Text
           weight={FONT_WEIGHT.regular}
           size={FONT_SIZE.xs}
           color={COLORS.gray2}
           className="leading-5"
         >
-          {userAddress.details}
+          {userSelectedAddress.details}
         </Typography.Text>
       ) : (
         <Typography.Text
@@ -117,7 +119,7 @@ const VehicleOwnerDetailsForm: React.FC = () => {
         </Typography.Text>
       )}
 
-      {userAddress?.id ? (
+      {userSelectedAddress?.id ? (
         <Fragment />
       ) : (
         <NextLink href={PATH.userAddressModal}>
