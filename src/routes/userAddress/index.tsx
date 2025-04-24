@@ -10,18 +10,13 @@ const getUserAddress = async (): Promise<Address[] | null> => {
   try {
     const res = await fetch(`${BASE_URL}/my-addresses/`, {
       next: {
+        revalidate: false,
         tags: ["userAddress"],
       },
     });
     if (!res.ok) {
       redirect(PATH.home);
     }
-    await new Promise((res) => {
-      setTimeout(() => {
-        // added delay to show loading modal
-        res(true);
-      }, 2000);
-    });
     return res.json();
   } catch (error) {
     console.log(error);
