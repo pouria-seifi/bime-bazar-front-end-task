@@ -4,9 +4,8 @@ import {
   IPostVehicleOwnerDetailsResult,
   IVehicleOwnerDetailsFormErrors,
 } from "@/src/types";
-import { isValidMobile, isValidNationalId } from "@/src/utils";
-
-const BASE_URL = "https://front-end-task.bmbzr.ir";
+import { isValidMobile, isValidNationalId } from "@/src/utils/helper";
+import { BASE_URL } from "@/src/utils/constants";
 
 export async function postVehicleOwnerDetails(
   _: IPostVehicleOwnerDetailsResult,
