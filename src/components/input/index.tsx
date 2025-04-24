@@ -8,6 +8,7 @@ type InputProps = {
   placeholder?: string;
   error?: string;
   disabled?: boolean;
+  checked?: boolean;
   className?: string;
   pattern?: string;
   dir?: string;
@@ -24,6 +25,7 @@ const Input: React.FC<InputProps> = ({
   className = "",
   pattern,
   dir = "rtl",
+  checked,
 }) => {
   return (
     <div className="flex flex-col gap-1">
@@ -37,6 +39,7 @@ const Input: React.FC<InputProps> = ({
         placeholder={placeholder}
         disabled={disabled}
         pattern={pattern}
+        checked={checked}
         className={`
           border border-gray-1 p-3 
           focus:outline-none focus:ring-0
