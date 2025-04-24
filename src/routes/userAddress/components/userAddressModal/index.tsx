@@ -1,26 +1,26 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+
 import Modal from "@/src/components/modal";
 import { Address } from "@/src/types";
 import Button from "@/src/components/button";
-import Input from "@/src/components/input";
 import { Typography } from "@/src/components/typography";
 import { COLORS, FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
 import NextImage from "@/src/components/nextImage";
+import useUserStore from "@/src/stores/user";
 
 import RedCloseIcon from "@/public/images/redCloseIcon.svg";
-import { useState } from "react";
 
 interface UserAddressModalProps {
   addresses: Address[];
 }
 
 const UserAddressModal = ({ addresses }: UserAddressModalProps) => {
-  const [selectedAddressId, setSelectedAddressId] = useState<string | null>(
-    null
-  );
+  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
   const router = useRouter();
+  const addAddress = useUserStore((state) => state.addAddress);
 
   const onClose = () => {
     router.back();
@@ -32,29 +32,39 @@ const UserAddressModal = ({ addresses }: UserAddressModalProps) => {
       isOpen={true}
       onClose={onClose}
       footer={
-        <Button type="button" color="thirdinary" className="h-12">
+        <Button
+          type="button"
+          color="thirdinary"
+          className="h-12"
+          isDisable={!selectedAddress}
+          onClick={() => {
+            if (!selectedAddress) return;
+            addAddress(selectedAddress);
+            onClose();
+          }}
+        >
           انتخاب
         </Button>
       }
     >
       <div className="flex flex-col px-3 py-4 gap-4">
         {addresses.map((address: Address) => (
-          <div
+          <label
             key={address.id}
-            className="flex items-start justify-center flex-row w-full"
+            className="flex items-start justify-center w-full cursor-pointer"
+            htmlFor={address.id}
           >
-            <Input
+            <input
               type="radio"
               name="address"
-              className="mt-1"
-              onChange={() => {
-                console.log("address.id", address.id);
-
-                setSelectedAddressId(address.id);
-              }}
-              checked={selectedAddressId === address.id}
+              id={address.id}
+              checked={selectedAddress?.id === address.id}
+              onChange={() => setSelectedAddress(address)}
+              className="sr-only peer"
             />
-            <div className="relative flex flex-col w-full mr-1">
+            <div className="w-3 h-3 mt-1 ml-1 rounded-full border-2 border-gray-300 peer-checked:bg-black transition-all" />
+
+            <div className="relative flex flex-col w-full">
               <Typography.Text
                 weight={FONT_WEIGHT.medium}
                 size={FONT_SIZE.sm}
@@ -80,7 +90,7 @@ const UserAddressModal = ({ addresses }: UserAddressModalProps) => {
                 className="absolute top-0 left-0 cursor-pointer"
               />
             </div>
-          </div>
+          </label>
         ))}
       </div>
     </Modal>
