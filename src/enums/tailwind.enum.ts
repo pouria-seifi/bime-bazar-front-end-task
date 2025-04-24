@@ -1,4 +1,6 @@
 export enum FONT_SIZE {
+  /** 12px*/
+  xs = "text-xs",
   /** 14px*/
   sm = "text-sm",
   /** 16px*/
@@ -41,4 +43,5 @@ export enum COLORS {
   black = "primary-base-black",
   red = "text-[#E61F10]",
   gray1 = "text-[#808080]",
+  gray2 = "text-[#757575]",
 }

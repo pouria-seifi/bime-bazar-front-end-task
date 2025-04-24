@@ -21,3 +21,9 @@ export interface IPostVehicleOwnerDetailsResult
   extends IVehicleOwnerDetailsForm {
   errors?: IVehicleOwnerDetailsFormErrors;
 }
+
+export interface Address {
+  id: string;
+  name: string;
+  details: string;
+}

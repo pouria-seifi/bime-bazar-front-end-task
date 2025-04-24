@@ -1,13 +1,18 @@
 "use client";
 
 import { Fragment } from "react";
-import { Typography } from "../typography";
+
+import { Typography } from "@/src/components/typography";
 import { FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
+import NextImage from "@/src/components/nextImage";
+
+import CloseIcon from "@/public/images/closeIcon.svg";
 
 type ModalProps = {
   isOpen: boolean;
   onClose?: () => void;
   children: React.ReactNode;
+  footer?: React.ReactNode;
   ariaLabel?: string;
   title?: string;
 };
@@ -18,6 +23,7 @@ const Modal = ({
   children,
   ariaLabel = "Bottom sheet modal",
   title,
+  footer,
 }: ModalProps) => {
   if (!isOpen) return null;
 
@@ -36,7 +42,7 @@ const Modal = ({
 
       <div className="relative w-full bg-white max-h-[90vh] overflow-y-auto animate-slide-up transition-all z-20">
         {title ? (
-          <div className="flex flex-row items-center justify-between px-3 py-4">
+          <div className="flex flex-row items-center justify-between px-3 py-4 border-b border-gray-7">
             <Typography.Text
               weight={FONT_WEIGHT.medium}
               size={FONT_SIZE.base}
@@ -44,11 +50,28 @@ const Modal = ({
             >
               {title}
             </Typography.Text>
+
+            <NextImage
+              src={CloseIcon}
+              alt="close icon"
+              width={14}
+              height={14}
+              onClick={onClose}
+              className="cursor-pointer"
+            />
           </div>
         ) : (
           <Fragment />
         )}
         {children}
+
+        {footer ? (
+          <div className="flex flex-row items-center justify-between p-3 border-t border-gray-7">
+            {footer}
+          </div>
+        ) : (
+          <Fragment />
+        )}
       </div>
     </div>
   );
