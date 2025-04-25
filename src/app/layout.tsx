@@ -20,17 +20,20 @@ export default function RootLayout({
   children,
   modal,
   success,
+  failedSubmit,
 }: Readonly<{
   children: React.ReactNode;
   success: React.ReactNode;
   modal: React.ReactNode;
+  failedSubmit: React.ReactNode;
 }>) {
   return (
     <html lang="en" dir="rtl">
       <body className={`${vazirmatn.className}`}>
         {children}
         {success}
-        <Home>{modal}</Home>
+        {modal}
+        <Home>{failedSubmit}</Home>
       </body>
     </html>
   );
