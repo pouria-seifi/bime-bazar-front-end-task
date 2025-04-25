@@ -55,9 +55,9 @@ export async function postVehicleOwnerDetails(
 
     return {
       success: false,
-      message: "مشکل در پردازش داده",
+      message: error.errors?.[0],
       errors: {
-        sumbitErrorMessage: error.errors?.[0],
+        isBackendError: true,
       },
     };
   }

@@ -42,8 +42,8 @@ const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
     if (message?.success || !message.errors) return;
     const hasError = Object.values(message?.errors || []).some(Boolean);
 
-    if (hasError && message?.errors?.sumbitError) {
-      alert(message.errors?.sumbitErrorMessage);
+    if (hasError && message?.errors?.isBackendError) {
+      alert(message.message);
       router.push(PATH.failedSubmit);
       return;
     }
