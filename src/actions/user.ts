@@ -1,19 +1,22 @@
 "use server";
 
 import {
-  IPostVehicleOwnerDetailsResult,
+  IPostVehicleOwnerDetailsResponse,
+  IVehicleOwnerDetailsForm,
   IVehicleOwnerDetailsFormErrors,
 } from "@/src/types";
 import { isValidMobile, isValidNationalId } from "@/src/utils/helper";
 import { BASE_URL } from "@/src/utils/constants";
 
 export async function postVehicleOwnerDetails(
-  _: IPostVehicleOwnerDetailsResult,
+  _: IPostVehicleOwnerDetailsResponse,
   formData: FormData
-): Promise<IPostVehicleOwnerDetailsResult> {
-  const nationalId = (formData.get("nationalId") as string)?.trim() || "";
-  const phoneNumber = (formData.get("phoneNumber") as string)?.trim() || "";
-  const addressId = (formData.get("addressId") as string)?.trim() || "";
+): Promise<IPostVehicleOwnerDetailsResponse> {
+  const data: IVehicleOwnerDetailsForm = {
+    nationalId: (formData.get("nationalId") as string)?.trim() || "",
+    phoneNumber: (formData.get("phoneNumber") as string)?.trim() || "",
+    addressId: (formData.get("addressId") as string)?.trim() || "",
+  };
 
   const errors: IVehicleOwnerDetailsFormErrors = {
     nationalIdError: "",
@@ -21,20 +24,24 @@ export async function postVehicleOwnerDetails(
     addressIdError: "",
   };
 
-  if (!nationalId || !isValidNationalId(nationalId)) {
+  if (!data.nationalId || !isValidNationalId(data.nationalId)) {
     errors.nationalIdError = "کدملی وارد شده معتبر نیست.";
   }
-  if (!phoneNumber || !isValidMobile(phoneNumber)) {
+  if (!data.phoneNumber || !isValidMobile(data.phoneNumber)) {
     errors.phoneNumberError = "شماره تلفن همراه معتبر نیست.";
   }
-  if (!addressId) {
+  if (!data.addressId) {
     errors.addressIdError = "آدرسی وارد نشده است.";
   }
 
   const hasError = Object.values(errors).some(Boolean);
-  if (hasError) return { errors } as IPostVehicleOwnerDetailsResult;
+  if (hasError)
+    return {
+      success: false,
+      message: "اطلاعات فرم نا معتبر است",
+      errors,
+    };
 
-  const data = { nationalId, phoneNumber, addressId };
   const response = await fetch(`${BASE_URL}/order/completion/`, {
     method: "POST",
     headers: {
@@ -42,16 +49,21 @@ export async function postVehicleOwnerDetails(
     },
     body: JSON.stringify(data),
   });
+
   if (!response.ok) {
     const error = await response.json();
 
     return {
+      success: false,
+      message: "مشکل در پردازش داده",
       errors: {
-        sumbitError: true,
         sumbitErrorMessage: error.errors?.[0],
       },
-    } as IPostVehicleOwnerDetailsResult;
+    };
   }
 
-  return data;
+  return {
+    success: true,
+    message: "فرم با موفقیت ارسال شد",
+  };
 }

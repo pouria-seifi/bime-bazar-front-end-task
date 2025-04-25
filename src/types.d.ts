@@ -19,8 +19,9 @@ export interface IVehicleOwnerDetailsFormErrors {
   sumbitErrorMessage?: string;
 }
 
-export interface IPostVehicleOwnerDetailsResult
-  extends IVehicleOwnerDetailsForm {
+export interface IPostVehicleOwnerDetailsResponse {
+  success: boolean;
+  message: string;
   errors?: IVehicleOwnerDetailsFormErrors;
 }
 

@@ -13,8 +13,8 @@ import { Typography } from "@/src/components/typography";
 import { COLORS, FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
 import Input from "@/src/components/input";
 import Button from "@/src/components/button";
-import { postVehicleOwnerDetails } from "@/src/actions/vehicleOwner";
-import { IPostVehicleOwnerDetailsResult } from "@/src/types";
+import { postVehicleOwnerDetails } from "@/src/actions/user";
+import { IPostVehicleOwnerDetailsResponse } from "@/src/types";
 import NextLink from "@/src/components/nextLink";
 import { PATH } from "@/src/enums/global.enum";
 import useUserStore from "@/src/stores/user";
@@ -34,16 +34,12 @@ const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
   const [isFormValid, setIsFormValid] = useState(false);
 
   const [message, formAction, isPending] = useActionState<
-    IPostVehicleOwnerDetailsResult,
+    IPostVehicleOwnerDetailsResponse,
     FormData
-  >(postVehicleOwnerDetails, {
-    nationalId: "",
-    phoneNumber: "",
-    addressId: "",
-  });
+  >(postVehicleOwnerDetails, { success: false, message: "" });
 
   useEffect(() => {
-    if (!message?.errors) return;
+    if (message?.success || !message.errors) return;
     const hasError = Object.values(message?.errors || []).some(Boolean);
 
     if (hasError && message?.errors?.sumbitError) {
@@ -55,7 +51,7 @@ const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
     if (!hasError) {
       router.push(PATH.successSubmit);
     }
-  }, [message?.errors]);
+  }, [message.errors]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
