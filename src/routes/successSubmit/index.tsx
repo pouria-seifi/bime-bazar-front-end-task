@@ -7,14 +7,14 @@ import { Typography } from "@/src/components/typography";
 import { COLORS, FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
 import Header from "@/src/components/header";
 import NextImage from "@/src/components/nextImage";
-import { LabelValuePairs } from "@/src/types";
+import { ILabelValuePairs } from "@/src/types";
 import Button from "@/src/components/button";
 
 import Logo from "@/public/images/logo.svg";
 import Success from "@/public/images/success.svg";
 import CarPlate from "@/public/images/carPlate.svg";
 
-const insurancePolicyDetails: LabelValuePairs = [
+const insurancePolicyDetails: ILabelValuePairs = [
   { label: "شرکت بیمه گر", value: "پارسیان" },
   { label: "برند خودرو", value: "پژو" },
   { label: "مدل خودرو", value: "206 تیپ 6" },

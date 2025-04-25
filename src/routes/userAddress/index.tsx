@@ -3,10 +3,10 @@ import { redirect } from "next/navigation";
 
 import { BASE_URL } from "@/src/utils/constants";
 import { PATH } from "@/src/enums/global.enum";
-import { Address } from "@/src/types";
+import { IAddress } from "@/src/types";
 import UserAddressModal from "./components/userAddressModal";
 
-const getUserAddress = async (): Promise<Address[] | null> => {
+const getUserAddress = async (): Promise<IAddress[] | null> => {
   try {
     const res = await fetch(`${BASE_URL}/my-addresses/`, {
       next: {
@@ -15,6 +15,8 @@ const getUserAddress = async (): Promise<Address[] | null> => {
       },
     });
     if (!res.ok) {
+      const error = await res.json();
+      console.log("error", error);
       redirect(PATH.home);
     }
     return res.json();

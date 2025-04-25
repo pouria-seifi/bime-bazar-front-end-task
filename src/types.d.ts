@@ -1,9 +1,9 @@
-export interface LabelValuePair {
+export interface ILabelValuePair {
   label: string;
   value: string;
 }
 
-export type LabelValuePairs = LabelValuePair[];
+export type ILabelValuePairs = ILabelValuePair[];
 
 export interface IVehicleOwnerDetailsForm {
   nationalId: string;
@@ -24,7 +24,7 @@ export interface IPostVehicleOwnerDetailsResponse {
   errors?: IVehicleOwnerDetailsFormErrors;
 }
 
-export interface Address {
+export interface IAddress {
   id: string;
   name: string;
   details: string;

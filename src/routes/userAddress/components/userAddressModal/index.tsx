@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
 import Modal from "@/src/components/modal";
-import { Address } from "@/src/types";
+import { IAddress } from "@/src/types";
 import Button from "@/src/components/button";
 import { Typography } from "@/src/components/typography";
 import { COLORS, FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
@@ -15,11 +15,11 @@ import { PATH } from "@/src/enums/global.enum";
 import RedCloseIcon from "@/public/images/redCloseIcon.svg";
 
 interface UserAddressModalProps {
-  addresses: Address[];
+  addresses: IAddress[];
 }
 
 const UserAddressModal = ({ addresses }: UserAddressModalProps) => {
-  const [selectedAddress, setSelectedAddress] = useState<Address | null>(null);
+  const [selectedAddress, setSelectedAddress] = useState<IAddress | null>(null);
   const router = useRouter();
 
   const setUserSelectedAddress = useUserStore(
@@ -44,7 +44,7 @@ const UserAddressModal = ({ addresses }: UserAddressModalProps) => {
 
   const deleteAddress = (
     e: React.MouseEvent<HTMLDivElement>,
-    address: Address
+    address: IAddress
   ) => {
     e.preventDefault();
     e.stopPropagation();
@@ -74,8 +74,11 @@ const UserAddressModal = ({ addresses }: UserAddressModalProps) => {
       }
     >
       <div className="flex flex-col px-3 py-4 gap-4">
-        {userAddressList?.length ? (
-          userAddressList.map((address: Address) => (
+        {/* to prevent in first render before set userAddressList show no address found  */}
+        {/* i added userAddressList || addresses and in first render before setState it shows addresses */}
+        {/* and then i see  userAddressListin next re renders */}
+        {(userAddressList || addresses)?.length ? (
+          (userAddressList || addresses).map((address: IAddress) => (
             <label
               key={address.id}
               className="flex items-start justify-center w-full"

@@ -1,14 +1,14 @@
 import { create } from "zustand";
-import { Address } from "@/src/types";
+import { IAddress } from "@/src/types";
 
 interface State {
-  userSelectedAddress: Address | null;
-  setUserSelectedAddress: (address: Address) => void;
-  userAddressList: Address[] | null;
-  setUserAddressList: (address: Address[]) => void;
-  selectedToRemoveAddress: Address | null;
-  setselectedToRemoveAddress: (address: Address) => void;
-  removeAddress: (address: Address) => void;
+  userSelectedAddress: IAddress | null;
+  setUserSelectedAddress: (address: IAddress) => void;
+  userAddressList: IAddress[] | null;
+  setUserAddressList: (address: IAddress[]) => void;
+  selectedToRemoveAddress: IAddress | null;
+  setselectedToRemoveAddress: (address: IAddress) => void;
+  removeAddress: (address: IAddress) => void;
 }
 
 const useUserStore = create<State>((set) => ({
