@@ -12,18 +12,22 @@ interface State {
 }
 
 const useUserStore = create<State>((set) => ({
+  // save userSelectedAddress to make it accessible in home page to show
   userSelectedAddress: null,
   setUserSelectedAddress: (address) =>
     set(() => ({ userSelectedAddress: address })),
 
+  // // save userAddressList to make it accessible in user address modal
   userAddressList: null,
   setUserAddressList: (addressList) =>
     set(() => ({ userAddressList: addressList })),
 
+  // save selectedToRemoveAddress to make it accessible in deleteUserAddress modal
   selectedToRemoveAddress: null,
   setselectedToRemoveAddress: (address) =>
     set(() => ({ selectedToRemoveAddress: address })),
 
+  // remove selected to remove address locally
   removeAddress: (address) =>
     set((state) => ({
       userAddressList: [
