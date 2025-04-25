@@ -9,8 +9,6 @@ export interface IRedirect {
 
 const Redirect: FC<IRedirect> = ({ to = PATH.home }) => {
   redirect(to);
-
-  return null;
 };
 
 export default Redirect;

@@ -1,7 +1,7 @@
 import { FC } from "react";
 
-import LoadingImg from "@/public/images/loading.svg";
 import NextImage from "@/src/components/nextImage";
+import LoadingImg from "@/public/images/loading.svg";
 
 const Loading: FC = () => {
   return (

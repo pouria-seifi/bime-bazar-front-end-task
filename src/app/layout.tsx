@@ -28,11 +28,15 @@ export default function RootLayout({
   failedSubmit: React.ReactNode;
 }>) {
   return (
-    <html lang="en" dir="rtl">
+    <html lang="fa" dir="rtl">
       <body className={`${vazirmatn.className}`}>
         {children}
         {success}
         {modal}
+
+        {/* i wanted to have failedSubmit modal inside VehicleOwnerDetailsForm  */}
+        {/* because i wanted to have button with type submit to be able to submit form */}
+        {/* on clicking on retry button in failed submit modal */}
         <Home>{failedSubmit}</Home>
       </body>
     </html>
