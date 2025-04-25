@@ -1,7 +1,5 @@
-"use client";
-
-import { useRouter } from "next/navigation";
-import { FC, useEffect } from "react";
+import { redirect } from "next/navigation";
+import { FC } from "react";
 
 import { PATH } from "@/src/enums/global.enum";
 
@@ -10,11 +8,7 @@ export interface IRedirect {
 }
 
 const Redirect: FC<IRedirect> = ({ to = PATH.home }) => {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace(to);
-  }, [router]);
+  redirect(to);
 
   return null;
 };

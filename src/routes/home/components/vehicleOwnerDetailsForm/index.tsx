@@ -1,4 +1,5 @@
 "use client";
+
 import React, {
   Fragment,
   startTransition,
@@ -19,11 +20,11 @@ import NextLink from "@/src/components/nextLink";
 import { PATH } from "@/src/enums/global.enum";
 import useUserStore from "@/src/stores/user";
 
-interface VehicleOwnerDetailsFormProps {
+interface IVehicleOwnerDetailsFormProps {
   children: React.ReactNode;
 }
 
-const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
+const VehicleOwnerDetailsForm: React.FC<IVehicleOwnerDetailsFormProps> = ({
   children,
 }) => {
   const router = useRouter();
@@ -148,7 +149,7 @@ const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
       {userSelectedAddress?.id ? (
         <Fragment />
       ) : (
-        <NextLink href={PATH.userAddressModal}>
+        <NextLink href={PATH.userAddress}>
           <Button color="primary" className="h-12 mt-2 w-full">
             <Typography.Text
               weight={FONT_WEIGHT.semiBold}

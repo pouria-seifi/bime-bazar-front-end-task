@@ -1,15 +1,15 @@
 import React from "react";
 
-import { Typography } from "../typography";
+import { Typography } from "@/src/components/typography";
 import { FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
 import NextImage from "@/src/components/nextImage";
 
-interface Props {
+interface HeaderProps {
   title: string;
   src: string;
 }
 
-const Header: React.FC<Props> = ({ title, src }) => {
+const Header: React.FC<HeaderProps> = ({ title, src }) => {
   return (
     <header className="h-14 flex flex-row items-center gap-1.5 px-2 py-3 shadow-1">
       <NextImage src={src} alt="car logo" width={32} height={32} />

@@ -1,6 +1,6 @@
 export enum PATH {
   home = "/",
-  userAddressModal = "/userAddress",
+  userAddress = "/userAddress",
   deleteUserAddress = "/deleteUserAddress",
   failedSubmit = "/failedSubmit",
   successSubmit = "/successSubmit",
