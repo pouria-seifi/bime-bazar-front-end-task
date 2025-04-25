@@ -2,8 +2,8 @@ import React from "react";
 
 import DeleteUserAddress from "@/src/routes/deleteUserAddress";
 
-const DeleteUserAddressPage = () => {
+const DeleteUserAddressInterceptedPage = () => {
   return <DeleteUserAddress />;
 };
 
-export default DeleteUserAddressPage;
+export default DeleteUserAddressInterceptedPage;

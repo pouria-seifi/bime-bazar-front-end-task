@@ -1,17 +1,9 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { PATH } from "@/src/enums/global.enum";
+import Redirect from "@/src/components/redirect";
 
-const RedirectPage = () => {
-  const router = useRouter();
-
-  useEffect(() => {
-    router.replace(PATH.home);
-  }, [router]);
-
-  return null;
+const FailedSubmitPage = () => {
+  return <Redirect />;
 };
 
-export default RedirectPage;
+export default FailedSubmitPage;

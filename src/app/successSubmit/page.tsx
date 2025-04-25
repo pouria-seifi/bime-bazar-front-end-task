@@ -1,9 +1,9 @@
 "use client";
 
-import SuccessSubmit from "@/src/routes/successSubmit";
+import Redirect from "@/src/components/redirect";
 
 const SuccessSubmitPage = () => {
-  return <SuccessSubmit />;
+  return <Redirect />;
 };
 
 export default SuccessSubmitPage;

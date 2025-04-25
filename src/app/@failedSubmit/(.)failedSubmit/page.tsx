@@ -3,8 +3,8 @@ import React from "react";
 
 import FailedSubmit from "@/src/routes/failedSubmit";
 
-const FailedSubmitPage = () => {
+const FailedSubmitInterceptedPage = () => {
   return <FailedSubmit />;
 };
 
-export default FailedSubmitPage;
+export default FailedSubmitInterceptedPage;
