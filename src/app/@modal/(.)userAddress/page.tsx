@@ -8,7 +8,7 @@ export default function UserAddress() {
   return (
     <Suspense
       fallback={
-        // for better user experience i added loading moadl as fallback
+        // for better user experience i added loading modal as fallback
         <Modal title="انتخاب آدرس" isOpen={true}>
           <div className="flex items-center justify-center p-8">
             <Loading />
