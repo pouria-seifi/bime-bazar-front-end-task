@@ -12,6 +12,7 @@ type InputProps = {
   className?: string;
   pattern?: string;
   dir?: string;
+  maxLength?: number;
 };
 
 const Input: React.FC<InputProps> = ({
@@ -26,6 +27,7 @@ const Input: React.FC<InputProps> = ({
   pattern,
   dir = "rtl",
   checked,
+  maxLength,
 }) => {
   return (
     <div className="flex flex-col gap-1">
@@ -40,6 +42,7 @@ const Input: React.FC<InputProps> = ({
         disabled={disabled}
         pattern={pattern}
         checked={checked}
+        maxLength={maxLength}
         className={`
           border border-gray-1 p-3 
           focus:outline-none focus:ring-0

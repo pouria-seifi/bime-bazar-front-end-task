@@ -108,6 +108,7 @@ const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
         pattern="[0-9]*"
         className="placeholder:text-right"
         dir="ltr"
+        maxLength={10}
       />
       <Input
         name="phoneNumber"
@@ -117,6 +118,7 @@ const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
         pattern="[0-9]*"
         className="placeholder:!text-right"
         dir="ltr"
+        maxLength={11}
       />
 
       <Typography.Text
