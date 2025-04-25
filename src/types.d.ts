@@ -16,6 +16,7 @@ export interface IVehicleOwnerDetailsFormErrors {
   phoneNumberError?: string;
   addressIdError?: string;
   sumbitError?: boolean;
+  sumbitErrorMessage?: string;
 }
 
 export interface IPostVehicleOwnerDetailsResult

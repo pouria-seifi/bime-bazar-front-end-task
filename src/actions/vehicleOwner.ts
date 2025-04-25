@@ -43,10 +43,12 @@ export async function postVehicleOwnerDetails(
     body: JSON.stringify(data),
   });
   if (!response.ok) {
-    // alert here
+    const error = await response.json();
+
     return {
       errors: {
         sumbitError: true,
+        sumbitErrorMessage: error.errors?.[0],
       },
     } as IPostVehicleOwnerDetailsResult;
   }
