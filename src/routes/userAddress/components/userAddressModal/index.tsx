@@ -61,7 +61,7 @@ const UserAddressModal = ({ addresses }: UserAddressModalProps) => {
         <Button
           type="button"
           color="thirdinary"
-          className="h-12"
+          className="h-12 w-full"
           isDisable={!selectedAddress}
           onClick={() => {
             if (!selectedAddress) return;

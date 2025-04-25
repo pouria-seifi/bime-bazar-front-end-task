@@ -36,7 +36,6 @@ export const defaultButtonClasses = {
 
 const Button: FC<IButton> = ({
   children,
-  width = "w-full",
   color = "primary",
   isLoading = false,
   isDisable = false,
@@ -52,7 +51,6 @@ const Button: FC<IButton> = ({
       type={type}
       className={
         `${defaultButtonClasses.base} ` +
-        `${width} ` +
         `${isDisable ? defaultButtonClasses[color].disabled : ""} ` +
         `${!isDisable ? defaultButtonClasses[color].active : ""} ` +
         `${isLoading ? defaultButtonClasses[color].loading : ""} ` +

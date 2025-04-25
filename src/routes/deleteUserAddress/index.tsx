@@ -30,7 +30,7 @@ const DeleteUserAddress = () => {
           <Button
             type="button"
             color="thirdinary"
-            className="h-12"
+            className="h-12 w-full"
             onClick={() => {
               if (!selectedToRemoveAddress?.id) return;
               removeAddress(selectedToRemoveAddress);
@@ -42,7 +42,7 @@ const DeleteUserAddress = () => {
           <Button
             type="button"
             color="secondary"
-            className="h-12"
+            className="h-12 w-full"
             onClick={onClose}
           >
             بازگشت

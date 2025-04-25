@@ -42,6 +42,7 @@ export enum COLORS {
   white = "primary-base-white",
   black = "primary-base-black",
   red = "text-[#E61F10]",
+  green = "text-[#34A862]",
   gray1 = "text-[#808080]",
   gray2 = "text-[#757575]",
 }

@@ -7,6 +7,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { useRouter } from "next/navigation";
 
 import { Typography } from "@/src/components/typography";
 import { COLORS, FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
@@ -17,7 +18,6 @@ import { IPostVehicleOwnerDetailsResult } from "@/src/types";
 import NextLink from "@/src/components/nextLink";
 import { PATH } from "@/src/enums/global.enum";
 import useUserStore from "@/src/stores/user";
-import { useRouter } from "next/navigation";
 
 interface VehicleOwnerDetailsFormProps {
   children: React.ReactNode;
@@ -43,10 +43,22 @@ const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
   });
 
   useEffect(() => {
-    if (message?.errors?.sumbitError) {
-      router.push(PATH.failedSubmit);
+    if (!message) return;
+    const hasError = Object.values(message?.errors || []).some(Boolean);
+
+    if (hasError) {
+      router.push(PATH.successSubmit);
+      return;
     }
-  }, [message?.errors]);
+
+    if (hasError && message?.errors?.sumbitError) {
+      router.push(PATH.failedSubmit);
+      return;
+    }
+    if (hasError) {
+      router.push(PATH.successSubmit);
+    }
+  }, [message]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -141,7 +153,7 @@ const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
         <Fragment />
       ) : (
         <NextLink href={PATH.userAddressModal}>
-          <Button color="primary" className="h-12 mt-2">
+          <Button color="primary" className="h-12 mt-2 w-full">
             <Typography.Text
               weight={FONT_WEIGHT.semiBold}
               size={FONT_SIZE.base}
@@ -156,7 +168,7 @@ const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
       <Button
         type="submit"
         color="thirdinary"
-        className="h-12 mt-6 max-w-32 mr-auto"
+        className="h-12 w-32 mt-6 mr-auto"
         isDisable={!isFormValid}
         isLoading={isPending}
       >

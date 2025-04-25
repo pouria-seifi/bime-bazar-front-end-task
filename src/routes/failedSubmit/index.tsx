@@ -26,7 +26,7 @@ const FailedSubmit = () => {
           <Button
             type="submit"
             color="thirdinary"
-            className="h-12"
+            className="h-12 w-full"
             isLoading={pending}
           >
             تایید
@@ -34,7 +34,7 @@ const FailedSubmit = () => {
           <Button
             type="button"
             color="secondary"
-            className="h-12"
+            className="h-12 w-full"
             onClick={onClose}
             isDisable={pending}
           >

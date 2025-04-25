@@ -3,4 +3,5 @@ export enum PATH {
   userAddressModal = "/userAddress",
   deleteUserAddress = "/deleteUserAddress",
   failedSubmit = "/failedSubmit",
+  successSubmit = "/successSubmit",
 }

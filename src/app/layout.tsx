@@ -19,14 +19,17 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
   modal,
+  success,
 }: Readonly<{
   children: React.ReactNode;
+  success: React.ReactNode;
   modal: React.ReactNode;
 }>) {
   return (
     <html lang="en" dir="rtl">
       <body className={`${vazirmatn.className}`}>
         {children}
+        {success}
         <Home>{modal}</Home>
       </body>
     </html>

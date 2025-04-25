@@ -1,9 +1,9 @@
-import CarPlate from "@/public/images/carPlate.svg";
-
 import { Typography } from "@/src/components/typography";
 import { COLORS, FONT_SIZE, FONT_WEIGHT } from "@/src/enums/tailwind.enum";
 import { LabelValuePairs } from "@/src/types";
 import NextImage from "@/src/components/nextImage";
+
+import CarPlate from "@/public/images/carPlate.svg";
 
 const insurancePolicyDetails: LabelValuePairs = [
   { label: "شرکت بیمه گر", value: "پارسیان" },
@@ -15,7 +15,7 @@ const InsurancePolicyDetails = () => {
   return (
     <div className="flex flex-col justify-center px-10 pt-6">
       <div className="relative h-[50px]">
-        <NextImage  className="" src={CarPlate} alt="car plate image" />
+        <NextImage className="" src={CarPlate} alt="car plate image" />
       </div>
 
       <div className="flex flex-col mt-6 gap-2">
