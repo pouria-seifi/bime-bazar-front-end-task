@@ -43,22 +43,18 @@ const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
   });
 
   useEffect(() => {
-    if (!message) return;
+    if (!message?.errors) return;
     const hasError = Object.values(message?.errors || []).some(Boolean);
-
-    if (hasError) {
-      router.push(PATH.successSubmit);
-      return;
-    }
 
     if (hasError && message?.errors?.sumbitError) {
       router.push(PATH.failedSubmit);
       return;
     }
-    if (hasError) {
+
+    if (!hasError) {
       router.push(PATH.successSubmit);
     }
-  }, [message]);
+  }, [message?.errors]);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
