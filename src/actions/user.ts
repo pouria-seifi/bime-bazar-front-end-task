@@ -55,7 +55,7 @@ export async function postVehicleOwnerDetails(
 
     return {
       success: false,
-      message: error.errors?.[0],
+      message: error.errors?.[0] || "پردازش اطلاعات با مشکل مواجه شد.",
       errors: {
         isBackendError: true,
       },
