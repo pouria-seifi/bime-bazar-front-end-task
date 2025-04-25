@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Vazirmatn } from "next/font/google";
-import "./globals.css";
+
+import Home from "@/src/routes/home";
+import "@/src/app/globals.css";
 
 const vazirmatn = Vazirmatn({
   subsets: ["arabic"],
@@ -24,8 +26,8 @@ export default function RootLayout({
   return (
     <html lang="en" dir="rtl">
       <body className={`${vazirmatn.className}`}>
-        {modal}
         {children}
+        <Home>{modal}</Home>
       </body>
     </html>
   );

@@ -1,5 +1,5 @@
-import Home from "@/src/routes/home";
+import React from "react";
 
 export default function HomePage() {
-  return <Home />;
+  return <span></span>;
 }

@@ -5,7 +5,7 @@ import Header from "@/src/components/header";
 import VehicleOwnerDetailsForm from "./components/vehicleOwnerDetailsForm";
 import InsurancePolicyDetails from "./components/insurancePolicyDetails";
 
-const Home = () => {
+const Home = ({ children }: { children: React.ReactNode }) => {
   return (
     <div className="min-h-screen">
       <main>
@@ -16,7 +16,7 @@ const Home = () => {
 
         <section className="mt-8">
           <Header title="مشخصات مالک خودرو" src={Logo} />
-          <VehicleOwnerDetailsForm />
+          <VehicleOwnerDetailsForm>{children}</VehicleOwnerDetailsForm>
         </section>
       </main>
     </div>
