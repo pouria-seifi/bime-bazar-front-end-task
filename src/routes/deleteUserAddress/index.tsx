@@ -20,6 +20,12 @@ const DeleteUserAddress = () => {
     router.back();
   };
 
+  const deleteAddress = async () => {
+    if (!selectedToRemoveAddress?.id) return;
+    await removeAddress(selectedToRemoveAddress);
+    onClose();
+  };
+
   return (
     <Modal
       title="حذف آدرس"
@@ -31,11 +37,7 @@ const DeleteUserAddress = () => {
             type="button"
             color="thirdinary"
             className="h-12 w-full"
-            onClick={() => {
-              if (!selectedToRemoveAddress?.id) return;
-              removeAddress(selectedToRemoveAddress);
-              onClose();
-            }}
+            onClick={deleteAddress}
           >
             تایید
           </Button>
