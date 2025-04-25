@@ -38,18 +38,12 @@ export async function postVehicleOwnerDetails(
   const response = await fetch(`${BASE_URL}/order/completion/`, {
     method: "POST",
     headers: {
-      // "Content-Type": "application/json",
+      "Content-Type": "application/json",
     },
-    // body: JSON.stringify(data),
+    body: JSON.stringify(data),
   });
-  console.log("====================================");
-  console.log("response1", response);
-  console.log("====================================");
   if (!response.ok) {
     // alert here
-    console.log("====================================");
-    console.log("response2", response);
-    console.log("====================================");
     return {
       errors: {
         sumbitError: true,
