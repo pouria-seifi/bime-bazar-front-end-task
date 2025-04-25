@@ -28,7 +28,7 @@ export async function postVehicleOwnerDetails(
     errors.phoneNumberError = "شماره تلفن همراه معتبر نیست.";
   }
   if (!addressId) {
-    errors.addressIdError = "true";
+    errors.addressIdError = "آدرسی وارد نشده است.";
   }
 
   const hasError = Object.values(errors).some(Boolean);
