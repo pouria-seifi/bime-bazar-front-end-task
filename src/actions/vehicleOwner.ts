@@ -13,7 +13,7 @@ export async function postVehicleOwnerDetails(
 ): Promise<IPostVehicleOwnerDetailsResult> {
   const nationalId = (formData.get("nationalId") as string)?.trim() || "";
   const phoneNumber = (formData.get("phoneNumber") as string)?.trim() || "";
-  const addressId = (formData.get("addressIdId") as string)?.trim() || "";
+  const addressId = (formData.get("addressId") as string)?.trim() || "";
 
   const errors: IVehicleOwnerDetailsFormErrors = {
     nationalIdError: "",
@@ -32,19 +32,29 @@ export async function postVehicleOwnerDetails(
   }
 
   const hasError = Object.values(errors).some(Boolean);
-
   if (hasError) return { errors } as IPostVehicleOwnerDetailsResult;
 
   const data = { nationalId, phoneNumber, addressId };
   const response = await fetch(`${BASE_URL}/order/completion/`, {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
+      // "Content-Type": "application/json",
     },
-    body: JSON.stringify(data),
+    // body: JSON.stringify(data),
   });
+  console.log("====================================");
+  console.log("response1", response);
+  console.log("====================================");
   if (!response.ok) {
     // alert here
+    console.log("====================================");
+    console.log("response2", response);
+    console.log("====================================");
+    return {
+      errors: {
+        sumbitError: true,
+      },
+    } as IPostVehicleOwnerDetailsResult;
   }
 
   return data;

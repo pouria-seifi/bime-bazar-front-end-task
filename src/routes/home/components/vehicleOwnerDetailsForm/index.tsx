@@ -3,6 +3,7 @@ import React, {
   Fragment,
   startTransition,
   useActionState,
+  useEffect,
   useRef,
   useState,
 } from "react";
@@ -16,8 +17,16 @@ import { IPostVehicleOwnerDetailsResult } from "@/src/types";
 import NextLink from "@/src/components/nextLink";
 import { PATH } from "@/src/enums/global.enum";
 import useUserStore from "@/src/stores/user";
+import { useRouter } from "next/navigation";
 
-const VehicleOwnerDetailsForm: React.FC = () => {
+interface VehicleOwnerDetailsFormProps {
+  children: React.ReactNode;
+}
+
+const VehicleOwnerDetailsForm: React.FC<VehicleOwnerDetailsFormProps> = ({
+  children,
+}) => {
+  const router = useRouter();
   const userSelectedAddress = useUserStore(
     (state) => state.userSelectedAddress
   );
@@ -33,9 +42,17 @@ const VehicleOwnerDetailsForm: React.FC = () => {
     addressId: "",
   });
 
+  useEffect(() => {
+    if (message?.errors?.sumbitError) {
+      router.push(PATH.failedSubmit);
+    }
+  }, [message?.errors]);
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    formData.append("addressId", String(userSelectedAddress?.id));
+
     startTransition(() => {
       formAction(formData);
     });
@@ -66,6 +83,7 @@ const VehicleOwnerDetailsForm: React.FC = () => {
       onInput={validateInputs}
       className="flex flex-col px-5 py-6"
     >
+      {children}
       <Typography.Text
         weight={FONT_WEIGHT.medium}
         size={FONT_SIZE.base}
