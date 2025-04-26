@@ -1,4 +1,4 @@
-"use server";
+"use client";
 
 import {
   IPostVehicleOwnerDetailsResponse,
@@ -6,7 +6,7 @@ import {
   IVehicleOwnerDetailsFormErrors,
 } from "@/src/types";
 import { isValidMobile, isValidNationalId } from "@/src/utils/helper";
-import { BASE_URL } from "@/src/utils/constants";
+import { NEXT_API_URL } from "@/src/utils/constants";
 
 export async function postVehicleOwnerDetails(
   _: IPostVehicleOwnerDetailsResponse,
@@ -42,11 +42,12 @@ export async function postVehicleOwnerDetails(
       errors,
     };
 
-  const response = await fetch(`${BASE_URL}/order/completion/`, {
+  const response = await fetch(`${NEXT_API_URL}/user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
     body: JSON.stringify(data),
   });
 
